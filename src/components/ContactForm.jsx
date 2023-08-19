@@ -16,7 +16,7 @@ export const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(addContact(contact.name, contact.number));
+    dispatch(addContact({ name: contact.name, number: contact.number }));
 
     // zresetuje cały formularz po wysłaniu
     setContact(prev => ({ ...INITIAL_STATE }));

@@ -2,28 +2,14 @@ import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllContacts } from 'redux/selectors';
-import { setContacts } from 'redux/actions';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/actions';
 
 export const App = () => {
   const dispatch = useDispatch();
-  // componentDidMount
   useEffect(() => {
-    const contactsJSON = localStorage.getItem('contacts');
-
-    if (contactsJSON) {
-      dispatch(setContacts(JSON.parse(contactsJSON)));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  //componentDidUpdate dla contacts
-  const contacts = useSelector(getAllContacts);
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
+    dispatch(fetchContacts());
+  }, [dispatch]);
   return (
     <div
       style={{
